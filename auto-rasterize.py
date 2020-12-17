@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#  auto_rasterize
+#  auto-rasterize
 #
 #     Huriel Reichel - huriel.ruan@gmail.com
 #     Nils Hamel - nils.hamel@bluewin.ch
@@ -59,6 +59,9 @@ def rasterize(input, output, xmin, ymin, xmax, ymax, pixel):
             xmin, pixel, 0,
             ymax, 0, -pixel,
         ))
+    target_ds.GetRasterBand(1).SetNoDataValue(0)
+    target_ds.GetRasterBand(2).SetNoDataValue(0)
+    target_ds.GetRasterBand(3).SetNoDataValue(0)
     if source_srs:
         # Make the target raster have the same projection as the source
         target_ds.SetProjection(source_srs.ExportToWkt())
@@ -67,7 +70,7 @@ def rasterize(input, output, xmin, ymin, xmax, ymax, pixel):
         target_ds.SetProjection('LOCAL_CS["arbitrary"]')
     # Rasterize
     err = gdal.RasterizeLayer(target_ds, (3, 2, 1), source_layer,
-            burn_values=(1, 1, 1))
+            burn_values=(255, 255, 255))
     if err != 0:
         raise Exception("error rasterizing layer: %s" % err)
 
