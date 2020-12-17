@@ -27,3 +27,16 @@ Copyright (c) 2020 Republic and Canton of Geneva
 
 This program is licensed under the terms of the GNU GPLv3. Documentation and illustrations are licensed under the terms of the CC BY-NC-SA.
 
+# Dependencies
+
+Python 3.8.5 or superior.
+
+Packages may be installed either with pip or conda
+
+* GDAL 3.1.3
+
+* ogr 0.18.1
+
+* argparse 0.26.2
+
+
