@@ -14,6 +14,12 @@ The figure below demonstrates a polygon of houses in Frauenfeld (TG - Switzerlan
 
 ![](example.png)
 
+If you don't have the coordinates from the crop, you may also extract them from another raster, and use it as reference. Follow the example below if this is your prefered choice.
+
+```
+$python3 auto_rasterize.py -i /path/to/shapefile.shp -o /path/to/output/GeoTiff.tif -r /home/usr/path/to/ref_rst.tif -p 10
+```
+
 # Copyright and License
 
 las-to-uv3 - Huriel Reichel Nils Hamel

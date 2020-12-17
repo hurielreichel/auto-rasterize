@@ -27,6 +27,7 @@ pm_argparse = argparse.ArgumentParser()
 # argument and parameter directive #
 pm_argparse.add_argument( '-i', '--input', type=str  , help='shapefile path'    )
 pm_argparse.add_argument( '-o', '--output' , type=str  , help='GeoTiff output path' )
+pm_argparse.add_argument( '-r', '--ref', type=str  , help='GeoTiff file for x and y reference, if needed'    )
 pm_argparse.add_argument( '--xmin' , type=float  , help='minimum X / Longitude value' )
 pm_argparse.add_argument( '--ymin' , type=float  , help='minimum Y / Latitude value' )
 pm_argparse.add_argument( '--xmax' , type=float  , help='maximum X / Longitude value' )
@@ -47,9 +48,11 @@ def rasterize(input, output, xmin, ymin, xmax, ymax, pixel):
     source_layer = source_ds.GetLayer(0)
     source_srs = source_layer.GetSpatialRef() 
     
+
     # Create the destination data source
     x_res = int((xmax - xmin) / pixel)
-    y_res = int((ymax - ymin) / pixel)
+    y_res = int((ymax - ymin) / pixel)      
+    
     target_ds = gdal.GetDriverByName('GTiff').Create(output, x_res,
             y_res, 3, gdal.GDT_Byte)
     target_ds.SetGeoTransform((
@@ -67,5 +70,30 @@ def rasterize(input, output, xmin, ymin, xmax, ymax, pixel):
             burn_values=(1, 1, 1))
     if err != 0:
         raise Exception("error rasterizing layer: %s" % err)
-        
-rasterize(pm_args.input, pm_args.output, pm_args.xmin, pm_args.ymin, pm_args.xmax, pm_args.ymax, pm_args.pixel)
+
+if (pm_args.ref == None):
+    print('rasterizing based on given coordinates')
+    rasterize(pm_args.input, pm_args.output, pm_args.xmin, pm_args.ymin, pm_args.xmax, pm_args.ymax, pm_args.pixel)
+    
+else:
+    print('rasterizing based on reference raster')
+
+    # Retrieve data from reference raster        
+    rst = gdal.Open(pm_args.ref)
+
+    # Resolution
+    pm_width = rst.RasterXSize
+    pm_height = rst.RasterYSize
+
+    pm_gtrans = rst.GetGeoTransform()
+
+    # retrieve raster geographic parameters #
+    xmin = pm_gtrans[0] # origin x #
+    ymax = pm_gtrans[3] # origin y #
+    pm_pw = pm_gtrans[1] # pixel width #
+    pm_ph = -pm_gtrans[5] # pixel height #
+    xmax = xmin + pm_pw * pm_width
+    ymin = ymax - pm_ph * pm_height
+
+    rasterize(pm_args.input, pm_args.output, xmin, ymin, xmax, ymax, pm_args.pixel)
+    
