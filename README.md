@@ -37,6 +37,4 @@ Packages may be installed either with pip or conda
 
 * ogr 0.18.1
 
-* argparse 0.26.2
-
 
