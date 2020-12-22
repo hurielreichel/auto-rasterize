@@ -7,7 +7,9 @@ In order to use this code, the main arguments are input shapefile path, output G
 The following exemplifies the code usage in a linux terminal in the CH1903+ Swiss Coordinate System.
 
 ```
-$ python3 auto-rasterize.py -i /path/to/shapefile.shp -o /path/to/output/GeoTiff.tif --xmin 2709756 --ymin 1268735 --xmax 2711300 --ymax 1270009 -p 10
+$ ./auto-rasterize -i /path/DKM25_GEBAEUDE.shp --xmin 2709346 --ymax 1268695 --xmax 2710488 --ymin 1267939 -p 1.25
+
+python3 auto-rasterize -i /path/DKM25_GEBAEUDE.shp --xmin 2709346 --ymax 1268695 --xmax 2710488 --ymin 1267939 -p 1.25
 ```
 
 The figure below demonstrates a polygon of houses in Frauenfeld (TG - Switzerland) - image on the left -  being rasterized and croped to a specific extent - image on the right.
@@ -17,9 +19,9 @@ The figure below demonstrates a polygon of houses in Frauenfeld (TG - Switzerlan
 If you don't have the coordinates from the crop, you may also extract them from another raster, and use it as reference. Follow the example below if this is your prefered choice.
 
 ```
-$ ./auto-rasterize -i /path/DKM25_GEBAEUDE.shp -/path/crop.tif --xmin 2709346 --ymax 1268695 --xmax 2710488 --ymin 1267939 -p 1.25
+$ ./auto-rasterize -i /path/DKM25_GEBAEUDE.shp -/path/crop.tif -p 1.25
 
-python3 auto-rasterize -i /path/DKM25_GEBAEUDE.shp -/path/crop.tif --xmin 2709346 --ymax 1268695 --xmax 2710488 --ymin 1267939 -p 1.25
+python3 auto-rasterize -i /path/DKM25_GEBAEUDE.shp -/path/crop.tif -p 1.25
 ```
 
 # Copyright and License
