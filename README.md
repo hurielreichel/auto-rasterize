@@ -9,7 +9,7 @@ The following exemplifies the code usage in a linux terminal in the CH1903+ Swis
 ```
 $ ./auto-rasterize -i /path/DKM25_GEBAEUDE.shp --xmin 2709346 --ymax 1268695 --xmax 2710488 --ymin 1267939 -p 1.25
 
-python3 auto-rasterize -i /path/DKM25_GEBAEUDE.shp --xmin 2709346 --ymax 1268695 --xmax 2710488 --ymin 1267939 -p 1.25
+$ python3 auto-rasterize -i /path/DKM25_GEBAEUDE.shp --xmin 2709346 --ymax 1268695 --xmax 2710488 --ymin 1267939 -p 1.25
 ```
 
 The figure below demonstrates a polygon of houses in Frauenfeld (TG - Switzerland) - image on the left -  being rasterized and croped to a specific extent - image on the right.
@@ -21,7 +21,7 @@ If you don't have the coordinates from the crop, you may also extract them from 
 ```
 $ ./auto-rasterize -i /path/DKM25_GEBAEUDE.shp -/path/crop.tif -p 1.25
 
-python3 auto-rasterize -i /path/DKM25_GEBAEUDE.shp -/path/crop.tif -p 1.25
+$ python3 auto-rasterize -i /path/DKM25_GEBAEUDE.shp -/path/crop.tif -p 1.25
 ```
 
 # Copyright and License
