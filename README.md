@@ -17,7 +17,9 @@ The figure below demonstrates a polygon of houses in Frauenfeld (TG - Switzerlan
 If you don't have the coordinates from the crop, you may also extract them from another raster, and use it as reference. Follow the example below if this is your prefered choice.
 
 ```
-$ python3 auto-rasterize.py -i /path/to/shapefile.shp -o /path/to/output/GeoTiff.tif -r /home/usr/path/to/ref_rst.tif -p 10
+$ ./auto-rasterize -i /path/DKM25_GEBAEUDE.shp -/path/crop.tif --xmin 2709346 --ymax 1268695 --xmax 2710488 --ymin 1267939 -p 1.25
+
+python3 auto-rasterize -i /path/DKM25_GEBAEUDE.shp -/path/crop.tif --xmin 2709346 --ymax 1268695 --xmax 2710488 --ymin 1267939 -p 1.25
 ```
 
 # Copyright and License
